@@ -118,10 +118,6 @@ function numberToScreen(event) {
 
     if (event.target.classList.contains('div-cell') || event.target.textContent.includes('=')) {
 
-        if ((displayPartOne.textContent.includes('.') || displayPartThree.textContent.includes('.')) && event.target.textContent.includes('.')) {
-            calcNumbers.pop();
-        }
-
 
         if (event.target.textContent.includes('AC')) {
             clear();
@@ -129,22 +125,47 @@ function numberToScreen(event) {
         }
 
         if (userOperatorValue.length - 1 >= 0) {
-            for (let i = 0; i <= 10; i++) {
-                if (event.target.textContent.includes(calcNumbers[i])) {
-                    displayPartThree.textContent += event.target.textContent;
-                    userInputTwo.push(event.target.textContent);
+
+            if (displayPartThree.textContent.includes('.') && event.target.textContent.includes('.')) {
+                for (let i = 0; i <= 9; i++) {
+                    if (event.target.textContent.includes(calcNumbers[i])) {
+                        displayPartThree.textContent += event.target.textContent;
+                        userInputTwo.push(event.target.textContent);
+                    }
+                }
+
+            } else {               
+                for (let i = 0; i <= 10; i++) {
+                    if (event.target.textContent.includes(calcNumbers[i])) {
+                        displayPartThree.textContent += event.target.textContent;
+                        userInputTwo.push(event.target.textContent);
+                    }
                 }
             }
+
         }
 
         if (userInputTwo.length - 1 < 0) {
-            for (let i = 0; i <= 10; i++) {
-                displayPartTwo.textContent = '';
-                if (event.target.textContent.includes(calcNumbers[i])) {
-                    displayPartOne.textContent += event.target.textContent;
-                    userInputOne.push(event.target.textContent);
+
+            if (displayPartOne.textContent.includes('.') && event.target.textContent.includes('.')) {
+                for (let i = 0; i <= 9; i++) {
+                    displayPartTwo.textContent = '';
+                    if (event.target.textContent.includes(calcNumbers[i])) {
+                        displayPartOne.textContent += event.target.textContent;
+                        userInputOne.push(event.target.textContent);
+                    }
+                }
+
+            } else {                 
+                for (let i = 0; i <= 10; i++) {
+                    displayPartTwo.textContent = '';
+                    if (event.target.textContent.includes(calcNumbers[i])) {
+                        displayPartOne.textContent += event.target.textContent;
+                        userInputOne.push(event.target.textContent);
+                    }
                 }
             }
+
         }
 
         for (let i = 0; i <= 3; i++) {
