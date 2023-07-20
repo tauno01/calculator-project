@@ -118,6 +118,10 @@ function numberToScreen(event) {
 
     if (event.target.classList.contains('div-cell') || event.target.textContent.includes('=')) {
 
+        if ((displayPartOne.textContent.includes('.') || displayPartThree.textContent.includes('.')) && event.target.textContent.includes('.')) {
+            calcNumbers.pop();
+        }
+
 
         if (event.target.textContent.includes('AC')) {
             clear();
@@ -177,7 +181,6 @@ function numberToScreen(event) {
 
             clear();
         }
-
 
     }
 
