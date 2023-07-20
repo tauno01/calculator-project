@@ -74,9 +74,17 @@ const calcNumberContainer = document.createElement('div');
 calcNumberContainer.classList.add('number-container');
 calcContainer.appendChild(calcNumberContainer);
 
+const equalBackspcContainer = document.createElement('div');
+equalBackspcContainer.classList.add('equal-backspc-container');
+calcContainer.appendChild(equalBackspcContainer);
+
 const equalContainer = document.createElement('div');
 equalContainer.classList.add('equal-container');
-calcContainer.appendChild(equalContainer);
+equalBackspcContainer.appendChild(equalContainer);
+
+const backspcContainer = document.createElement('div');
+backspcContainer.classList.add('backspace-container');
+equalBackspcContainer.appendChild(backspcContainer);
 
 
 // I use this array to put operators in the calculator buttons
@@ -98,6 +106,8 @@ for (let i = 0; i <= 15; i++) {
 
 }
 
+backspcContainer.textContent = 'DELETE';
+
 equalContainer.textContent = '=';
 
 
@@ -113,7 +123,21 @@ let calcOperators = ['+', '-', '*', '/'];
 the event target 'textContent' information in an array, that is used
 for the 'operate()' function */
 
+
 function numberToScreen(event) {   
+
+    if (event.target.textContent.includes('DELETE')) {
+        if (userInputTwo.length > 0) {
+            userInputTwo.pop();
+            displayPartThree.textContent = userInputTwo.join('');
+          } else if (userOperatorValue.length > 0) {
+            userOperatorValue.pop();
+            displayPartTwo.textContent = userOperatorValue.join('');
+          } else if (userInputOne.length > 0) {
+            userInputOne.pop();
+            displayPartOne.textContent = userInputOne.join('');
+          }
+    }
 
 
     if (event.target.classList.contains('div-cell') || event.target.textContent.includes('=')) {
@@ -222,3 +246,4 @@ function clear() {
 
 calcNumberContainer.addEventListener('click', numberToScreen);
 equalContainer.addEventListener('click', numberToScreen);
+backspcContainer.addEventListener('click', numberToScreen);
